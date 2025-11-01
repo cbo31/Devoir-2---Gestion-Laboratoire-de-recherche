@@ -17,6 +17,19 @@ R2 : Comment afficher un menu d'action :
 
 
 R2 : Comment enregistrer un nouvel arrivant
+	nom = input("Nom ?")
+	bureau = input("Bureau")
+	enregistrer_arrivee()
+	
 
+R2 : Comment enregistrer le départ d'une personne :
+	nom = input("Personne à supprimer ?")
+	labo.pop(nom)
+
+
+R2 : Comment modifier le bureau d'une personne :
+	nom = input("Nom ?")
+	nouveau_bureau = input("nouveau_bureau") 
+	labo[nom] = nouveau_bureau
 
 
