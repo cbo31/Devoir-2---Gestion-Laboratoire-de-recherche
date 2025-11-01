@@ -1,6 +1,7 @@
 R0 : Gestion d'un Laboratoire de recherche
 
 R1 : Comment gérer un laboratoire de recherche
+	Afficher un menu d'action
 	Enregistrer l'arrivée d'une nouvelle personne
 	Enregistrer le départ d'une personne 
 	Modifier le bureau d'une personne 
@@ -8,6 +9,14 @@ R1 : Comment gérer un laboratoire de recherche
 	Savoir si une personne est membre
 	Obtenir le bureau d'une personne 
 	Produire un listing du personnel
+
+
+R2 : Comment afficher un menu d'action :
+	print("Action à faire")
+	input("Votre choix")
+
+
+R2 : Comment enregistrer un nouvel arrivant
 
 
 
