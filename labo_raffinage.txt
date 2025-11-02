@@ -1,35 +1,69 @@
 R0 : Gestion d'un Laboratoire de recherche
 
 R1 : Comment gérer un laboratoire de recherche
-	Afficher un menu d'action
+	Definir exceptions personnalisés 
+	Definir la class du laboratoire	
 	Enregistrer l'arrivée d'une nouvelle personne
 	Enregistrer le départ d'une personne 
 	Modifier le bureau d'une personne 
 	Changer le nom d'une personne 
 	Savoir si une personne est membre
 	Obtenir le bureau d'une personne 
-	Produire un listing du personnel
 
 
-R2 : Comment afficher un menu d'action :
-	print("Action à faire")
-	input("Votre choix")
+R2 : Comment definir exceptions personnalisés :
+	class LaboException(Exception):
+	   pass
+	class AbsentException(LaboException)
+	   pass
+	class PresentException(LaboException):
+	   pass
+
+
+R2 : Comment definir la class du laboratoire :
+	return {}
 
 
 R2 : Comment enregistrer un nouvel arrivant
-	nom = input("Nom ?")
-	bureau = input("Bureau")
-	enregistrer_arrivee()
+	def enregistrer_arrivee(labo, nom, bureau)
+	   if nom in labo:
+	      raise ValueError
+	   labo[nom] = bureau
 	
 
 R2 : Comment enregistrer le départ d'une personne :
-	nom = input("Personne à supprimer ?")
-	labo.pop(nom)
+	def enregistrer_depart(labo, nom)
+	   if not nom in labo:
+	      raise AbsentException
+	   labo.pop(nom)
 
 
 R2 : Comment modifier le bureau d'une personne :
-	nom = input("Nom ?")
-	nouveau_bureau = input("nouveau_bureau") 
-	labo[nom] = nouveau_bureau
+	def changer_bureau (labo, nom, bureau):
+	   if not nom in labo:
+	      raise AbsentException
+ 	   labo[nom] = bureau
 
 
+R2 : Comment changer le nm d'une personne :
+	def changer_nom(labo, nom, nouveau_nom):
+	   if not nom in labo:
+	      raise AbsentException
+	   value = labo.pop(nom)
+	   labo[nouveau_nom] = value
+
+
+R2 : Comment savoir si une personne est membre : 
+	def est_presente(labo, nom):
+	   return nom in labo
+
+R2 : Comment obtenir le bureau d'une personne :
+	def nom_bureau(labo, nom):
+	   if nom in labo:
+	      return labo.get(nom)
+
+
+R2 : Comment produire un listing du laboratoire :
+	def listing(labo):
+	   for nom, bureau in labo.items
+	  

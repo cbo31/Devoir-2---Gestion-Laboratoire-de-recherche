@@ -1,0 +1,116 @@
+R0 : Gestion d'un Laboratoire de recherche
+
+R1 : Comment gérer un laboratoire de recherche
+	Afficher un menu
+	Demander le choix à l'utilisateur
+	Enregistrer l'arrivée d'une nouvelle personne
+	Enregistrer le départ d'une personne 
+	Modifier le bureau d'une personne 
+	Changer le nom d'une personne 
+	Obtenir le bureau d'une personne 
+	Produire un listing du laboratoire
+	Traiter le choix de l'utilisateur
+	Appliquer les fonctionnalites	
+
+
+R2 : Comment afficher un menu :
+	print('1- Enregistrer une arrivée')
+    	print('2- Présence d\'une personne')
+    	print('3- Enregistrer un départ')
+    	print("4- Modifier le bureau d'une personne")
+    	print("5- Changer le nom d'une personne")
+    	print("6- Connaitre le bureau d'une personne")
+    	print("7- Listing laboratoire")
+    	print('0- Quitter')
+
+
+R2 : Comment demander le choix à l'utilisateur :
+	def demander_choix():
+	   return int(input("Votre choix :  "))
+
+
+R2 : Comment enregistrer un nouvel arrivant
+	def gerer_arrivee(labo):
+           try:
+               nom = input("Nom ? ")
+               bureau = input("Bureau ? ")
+               enregistrer_arrivee(labo, nom, bureau)
+           except ValueError:
+               print("Impossible: déja là")
+
+
+R2 : Comment enregistrer le départ d'une personne :
+	def gerer_depart(labo):
+	   try: 
+              nom = input("Nom ? ")
+              enregistrer_depart(labo, nom)
+	      print(f"{nom} a été retiré du laboratoire")
+           except AbsentException:
+              print(f"{nom} n'existe pas dans le laboratoire")
+
+
+R2 : Comment modifier le bureau d'une personne :
+	def gerer_bureau(labo):
+	   try:
+              nom = input("Nom ? ")
+              bureau = input("Bureau ? ")
+              changer_bureau(labo, nom, bureau)
+           except AbsentException:
+              print(f"{nom} n'existe pas")
+
+
+R2 : Comment changer le nm d'une personne :
+	def modification_nom(labo):
+    	   try:
+              nom = input("Personne à modifier ? ")
+              nouveau_nom = input("Nouveau nom ? ")
+              changer_nom(labo, nom, nouveau_nom)
+           except AbsentException:
+              print(f"{nom} n'existe pas")
+
+
+R2 : Comment obtenir le bureau d'une personne :
+	def connaitre_bureau(labo):
+    	   nom = input("Nom ? ")
+    	   bureau = nom_bureau(labo, nom)
+    	   print(f"{nom} est dans le bureau {bureau}")
+
+
+R2 : Comment produire un listing du laboratoire :
+	def afficher_listing(labo):
+	   for nom, bureau in labo.items():
+	      print(f"{nom} est dans le bureau {bureau}")
+
+
+R2 : Comment traiter le choix de l'utilisaeur : 
+	def traiter_choix(choix, labo):
+    	if choix == 1:
+           gerer_arrivee(labo)
+    	elif choix == 2:
+           nom = input("Nom ? ")
+           reponse = est_presente(labo, nom)
+           print('oui, présente' if reponse else 'non, inconnue')
+    	elif choix == 3:
+           gerer_depart(labo)
+    	elif choix == 4:
+           gerer_bureau(labo)
+    	elif choix == 5:
+           modification_nom(labo)
+    	elif choix == 6:
+           connaitre_bureau(labo)
+    	elif choix == 7:
+           afficher_listing(labo)
+
+
+R2 : Comment traiter les fonctionnalites : 
+	def main():
+    	   quitter = False
+    	   labo = laboratoire()
+    	   while not quitter:
+              afficher_menu()
+              choix = demander_choix()
+              traiter_choix(choix, labo)
+              print()
+              print(labo)
+              quitter = choix == 0
+              print()	  

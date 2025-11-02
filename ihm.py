@@ -10,7 +10,8 @@ def afficher_menu():
     print('3- Enregistrer un départ')
     print("4- Modifier le bureau d'une personne")
     print("5- Changer le nom d'une personne")
-    print("6- Listing laboratoire")
+    print("6- Connaitre le bureau d'une personne")
+    print("7- Listing laboratoire")
     print('0- Quitter')
 
 
@@ -29,8 +30,9 @@ def gerer_depart(labo):
     try: 
         nom = input("Nom ? ")
         enregistrer_depart(labo, nom)
+        print(f"{nom} a été retiré du laboratoire")
     except AbsentException:
-        print(f"{nom} n'existe pas dans le laboratire")
+        print(f"{nom} n'existe pas dans le laboratoire")
 
 def gerer_bureau(labo):
     try:
@@ -49,8 +51,15 @@ def modification_nom(labo):
     except AbsentException:
         print(f"{nom} n'existe pas")
 
+def connaitre_bureau(labo):
+    nom = input("Nom ? ")
+    bureau = nom_bureau(labo, nom)
+    print(f"{nom} est dans le bureau {bureau}")
+
+
 def afficher_listing(labo):
-    listning(labo)
+    for nom, bureau in labo.items():
+        print(f"{nom} est dans le bureau {bureau}")
 
 
 
@@ -68,6 +77,8 @@ def traiter_choix(choix, labo):
     elif choix == 5:
         modification_nom(labo)
     elif choix == 6:
+        connaitre_bureau(labo)
+    elif choix == 7:
         afficher_listing(labo)
 
 
