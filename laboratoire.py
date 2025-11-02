@@ -37,7 +37,7 @@ class PresentException(LaboException):
 
 
 def laboratoire():
-    return {}
+    return {'Toto' : 'F001', 'Tati' : 'F002'}
 
 def enregistrer_arrivee(labo, nom, bureau):
     if nom in labo:
@@ -48,13 +48,22 @@ def enregistrer_depart(labo, nom):
     if not nom in labo:
         raise AbsentException
     labo.pop(nom)
+    print(f"{nom} a été retiré du laboratoire")
 
 def changer_bureau(labo, nom, bureau):
+    if not nom in labo:
+        raise AbsentException
     labo[nom] = bureau
 
 def changer_nom(labo, nom, nouveau_nom):
+    if not nom in labo:
+        raise AbsentException
     value = labo.pop(nom)
     labo[nouveau_nom] = value
+
+def listning(labo):
+    for nom, bureau in labo.items():
+        print(f"{nom} est dans le bureau {bureau}")
 
 def est_presente(labo, nom):
     return nom in labo

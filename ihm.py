@@ -10,12 +10,12 @@ def afficher_menu():
     print('3- Enregistrer un départ')
     print("4- Modifier le bureau d'une personne")
     print("5- Changer le nom d'une personne")
+    print("6- Listing laboratoire")
     print('0- Quitter')
 
 
 def demander_choix():
     return int(input("Votre choix: "))
-
 
 def gerer_arrivee(labo):
         try:
@@ -25,25 +25,32 @@ def gerer_arrivee(labo):
         except ValueError:
             print("Impossible: déja là")
 
-
 def gerer_depart(labo):
     try: 
         nom = input("Nom ? ")
         enregistrer_depart(labo, nom)
     except AbsentException:
-        print("Déjà parti")
-
+        print(f"{nom} n'existe pas dans le laboratire")
 
 def gerer_bureau(labo):
-    nom = input("Nom ? ")
-    bureau = input("Bureau ? ")
-    changer_bureau(labo, nom, bureau)
-
+    try:
+        nom = input("Nom ? ")
+        bureau = input("Bureau ? ")
+        changer_bureau(labo, nom, bureau)
+    except AbsentException:
+        print(f"{nom} n'existe pas")
+    
 
 def modification_nom(labo):
-    nom = input("Personne à modifier ? ")
-    nouveau_nom = input("Nouveau nom ? ")
-    changer_nom(labo, nom, nouveau_nom)
+    try:
+        nom = input("Personne à modifier ? ")
+        nouveau_nom = input("Nouveau nom ? ")
+        changer_nom(labo, nom, nouveau_nom)
+    except AbsentException:
+        print(f"{nom} n'existe pas")
+
+def afficher_listing(labo):
+    listning(labo)
 
 
 
@@ -60,6 +67,8 @@ def traiter_choix(choix, labo):
         gerer_bureau(labo)
     elif choix == 5:
         modification_nom(labo)
+    elif choix == 6:
+        afficher_listing(labo)
 
 
 
@@ -71,6 +80,7 @@ def main():
         afficher_menu()
         choix = demander_choix()
         traiter_choix(choix, labo)
+        print()
         print(labo)
         quitter = choix == 0
         print()
