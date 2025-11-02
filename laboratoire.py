@@ -49,8 +49,12 @@ def enregistrer_depart(labo, nom):
         raise AbsentException
     labo.pop(nom)
 
-def changer_bureau(labo):
-    
+def changer_bureau(labo, nom, bureau):
+    labo[nom] = bureau
+
+def changer_nom(labo, nom, nouveau_nom):
+    value = labo.pop(nom)
+    labo[nouveau_nom] = value
 
 def est_presente(labo, nom):
     return nom in labo
