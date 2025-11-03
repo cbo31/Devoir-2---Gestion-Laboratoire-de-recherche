@@ -25,28 +25,28 @@ R2 : Comment definir la class du laboratoire :
 
 
 R2 : Comment enregistrer un nouvel arrivant
-	def enregistrer_arrivee(labo, nom, bureau)
+	def enregistrer_arrivee(labo, nom, bureau) 			labo,nom,bureau: in
 	   if nom in labo:
 	      raise ValueError
 	   labo[nom] = bureau
 	
 
 R2 : Comment enregistrer le départ d'une personne :
-	def enregistrer_depart(labo, nom)
+	def enregistrer_depart(labo, nom) 				nom, labo: in
 	   if not nom in labo:
 	      raise AbsentException
 	   labo.pop(nom)
 
 
 R2 : Comment modifier le bureau d'une personne :
-	def changer_bureau (labo, nom, bureau):
+	def changer_bureau (labo, nom, bureau):				labo,nom,bureau: in
 	   if not nom in labo:
 	      raise AbsentException
  	   labo[nom] = bureau
 
 
 R2 : Comment changer le nm d'une personne :
-	def changer_nom(labo, nom, nouveau_nom):
+	def changer_nom(labo, nom, nouveau_nom): 			labo,nom,nouveau_nom: in
 	   if not nom in labo:
 	      raise AbsentException
 	   value = labo.pop(nom)
@@ -54,16 +54,16 @@ R2 : Comment changer le nm d'une personne :
 
 
 R2 : Comment savoir si une personne est membre : 
-	def est_presente(labo, nom):
+	def est_presente(labo, nom): 					labo,nom: out
 	   return nom in labo
 
 R2 : Comment obtenir le bureau d'une personne :
-	def nom_bureau(labo, nom):
+	def nom_bureau(labo, nom): 					labo: out; nom: in
 	   if nom in labo:
 	      return labo.get(nom)
 
 
 R2 : Comment produire un listing du laboratoire :
-	def listing(labo):
+	def listing(labo): 						labo: out
 	   for nom, bureau in labo.items
 	  
