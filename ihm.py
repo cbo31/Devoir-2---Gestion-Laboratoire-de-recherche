@@ -58,8 +58,16 @@ def connaitre_bureau(labo):
 
 
 def afficher_listing(labo):
-    for nom, bureau in labo.items():
-        print(f"{nom} est dans le bureau {bureau}")
+    labo_inverse = inverse_dictionnaire(labo)
+    for bureau, nom in sorted(labo_inverse.items()):
+        print(f"{bureau:2} :")
+        for elt in nom:
+            print(f"- {elt}", sep="\n")
+
+
+def fichier_html(labo):
+    temp = inverse_dictionnaire(labo)
+    ecrire_labo_html(temp)
 
 
 
@@ -79,6 +87,7 @@ def traiter_choix(choix, labo):
     elif choix == 6:
         connaitre_bureau(labo)
     elif choix == 7:
+        fichier_html(labo)
         afficher_listing(labo)
 
 
@@ -92,7 +101,7 @@ def main():
         choix = demander_choix()
         traiter_choix(choix, labo)
         print()
-        print(labo)
+        #print(labo)
         quitter = choix == 0
         print()
 
