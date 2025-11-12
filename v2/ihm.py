@@ -61,6 +61,13 @@ def afficher_listing(labo):
             print(f"- {elt}", sep="\n")
     
     ecrire_labo_html(labo_inverse)
+    write_as_json(labo_inverse)
+
+
+def import_from_csv(labo):
+    file = input("Nom de fichier ? ")
+    modify_dict_csv(labo, file)
+
 
 
 
@@ -82,6 +89,7 @@ def populate_menu(menu):
     ajouter_options(menu, "Changer le nom d'une personne", modification_nom)
     ajouter_options(menu, "Connaitre le bureau d'une personne", connaitre_bureau)
     ajouter_options(menu, "Listing laboratoire", afficher_listing)
+    ajouter_options(menu, "Importer depuis un fichier csv", import_from_csv)
 
 
 def traiter_choix(menu, choix):

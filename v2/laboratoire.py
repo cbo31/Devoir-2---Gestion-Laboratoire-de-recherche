@@ -2,6 +2,9 @@
 Fonctionnalités du laboratoire
 '''
 
+import json 
+import csv 
+
 
 class LaboException(Exception):
     pass
@@ -80,3 +83,21 @@ def ecrire_labo_html(labo):
                         </p>
                     """
                 file.write(e)
+
+
+def write_as_json(dictionnaire):
+    path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/laboratoire.json"
+    with open(path, "w") as fp:
+        json.dump(dictionnaire, fp, indent="")
+
+
+def modify_dict_csv(dictionnaire, file):
+    #path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/membres.csv"
+    #test = file
+    with open(file, newline="") as csvfile:
+        temp_dict = dict()
+        reader = csv.DictReader(csvfile)
+        for value in reader:
+            temp_dict[value["Nom"]] = value["Bureau"]
+
+    dictionnaire.update(temp_dict)
