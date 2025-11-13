@@ -85,10 +85,18 @@ def ecrire_labo_html(labo):
                 file.write(e)
 
 
-def write_as_json(dictionnaire):
-    path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/laboratoire.json"
+def write_as_json(dictionnaire, path):
+    #path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/laboratoire.json"
     with open(path, "w") as fp:
         json.dump(dictionnaire, fp, indent="")
+
+
+def load_json(dictionnaire, path):
+    #path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/laboratoire.json"
+    with open(path, "r") as fp:
+        temp_dict = json.load(fp)
+        dictionnaire.update(temp_dict)
+
 
 
 def modify_dict_csv(dictionnaire, file):

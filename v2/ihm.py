@@ -3,6 +3,7 @@ Interface gestion du laboratoire
 '''
 
 from laboratoire import *
+import os 
 
 #Fonctionne du gestionnaire de laboratoire
 def gerer_arrivee(labo):
@@ -10,6 +11,7 @@ def gerer_arrivee(labo):
             nom = input("Nom ? ")
             bureau = input("Bureau ? ")
             enregistrer_arrivee(labo, nom, bureau)
+            write_as_json(labo, "laboratoire.json")
         except ValueError:
             print("Impossible: déja là")
 
@@ -25,6 +27,7 @@ def gerer_depart(labo):
         nom = input("Nom ? ")
         enregistrer_depart(labo, nom)
         print(f"{nom} a été retiré du laboratoire")
+        write_as_json(labo, "laboratoire.json")
     except AbsentException:
         print(f"{nom} n'existe pas dans le laboratoire")
 
@@ -34,6 +37,7 @@ def gerer_bureau(labo):
         nom = input("Nom ? ")
         bureau = input("Bureau ? ")
         changer_bureau(labo, nom, bureau)
+        write_as_json(labo, "laboratoire.json")
     except AbsentException:
         print(f"{nom} n'existe pas")
     
@@ -43,6 +47,7 @@ def modification_nom(labo):
         nom = input("Personne à modifier ? ")
         nouveau_nom = input("Nouveau nom ? ")
         changer_nom(labo, nom, nouveau_nom)
+        write_as_json(labo, "laboratoire.json")
     except AbsentException:
         print(f"{nom} n'existe pas")
 
@@ -61,7 +66,20 @@ def afficher_listing(labo):
             print(f"- {elt}", sep="\n")
     
     ecrire_labo_html(labo_inverse)
-    write_as_json(labo_inverse)
+    write_as_json(labo_inverse, "laboratoire_ordered.json")
+
+
+def import_json(labo):
+    path = "laboratoire.json"
+    if os.path.exists(path):
+        try:
+            load_json(labo, path)
+        except json.JSONDecodeError:
+            pass
+    else:
+        return labo 
+
+
 
 
 def import_from_csv(labo):
@@ -134,6 +152,7 @@ if __name__ == "__main__":
      
     menu = Menu()
     labo = laboratoire()
+    import_json(labo)
     populate_menu(menu)
     gerer(menu)
     
