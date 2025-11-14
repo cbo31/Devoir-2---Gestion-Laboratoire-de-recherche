@@ -41,7 +41,5 @@ def gerer(menu):
         traiter_choix(menu, choix)
         fini = choix == 0
         print()
-    
-    print("Fermeture du gestionnaire de Laboratoire")
 
 

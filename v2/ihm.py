@@ -118,4 +118,5 @@ if __name__ == "__main__":
     import_json(labo)
     populate_menu(menu)
     gerer(menu)
+    print("Fermeture du gestionnaire de Laboratoire")
     
