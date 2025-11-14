@@ -6,6 +6,7 @@ import json
 import csv 
 
 
+
 class LaboException(Exception):
     pass
 
@@ -16,12 +17,13 @@ class PresentException(LaboException):
     pass
 
 
+
 def laboratoire():
     return {}
 
 def enregistrer_arrivee(labo, nom, bureau):
     if nom in labo:
-        raise ValueError
+        raise PresentException
     labo[nom] = bureau
 
 
@@ -61,7 +63,6 @@ def inverse_dictionnaire(labo):
 
 
 def ecrire_labo_html(labo):
-    #file_path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/laboratoire.html"
     file_path = "laboratoire.html"
     corps = f"""<body>
                     <h1>Laboratoire</h1>

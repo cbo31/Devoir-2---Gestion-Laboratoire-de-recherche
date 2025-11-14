@@ -87,25 +87,13 @@ def import_json(labo):
 def import_from_csv(labo):
     file = input("Nom de fichier ? ") + ".csv"
     csv_dict = load_csv(file)
-
-    temp_dict = dict()
-    temp_list = list()
     for csv_nom, csv_bureau in csv_dict.items():
-        if csv_nom not in labo:
-            temp_dict[csv_nom] = csv_bureau
-        else: 
-            temp_list.append(csv_nom)
-    
-    labo.update(temp_dict)
-
-
-    if temp_list == []:
-        pass
-    else:
-        print(f"{", ".join(temp_list)}, déjà présent dans le laboratoire")
+        try:
+            enregistrer_arrivee(labo, csv_nom, csv_bureau)
+        except:
+            print(f"{csv_nom} déjà présent dans le laboratoire")    
     
     write_as_json(labo, "laboratoire.json")
-
 
 
 
