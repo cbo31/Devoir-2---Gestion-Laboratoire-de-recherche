@@ -61,7 +61,8 @@ def inverse_dictionnaire(labo):
 
 
 def ecrire_labo_html(labo):
-    file_path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/laboratoire.html"
+    #file_path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/laboratoire.html"
+    file_path = "laboratoire.html"
     corps = f"""<body>
                     <h1>Laboratoire</h1>
                     <h2>Personnel</h2>
@@ -96,17 +97,6 @@ def load_json(dictionnaire, path):
         dictionnaire.clear()
         dictionnaire.update(temp_dict)
 
-
-'''
-def load_csv(dictionnaire, file):
-    with open(file, newline="") as csvfile:
-        temp_dict = dict()
-        reader = csv.DictReader(csvfile)
-        for value in reader:
-            temp_dict[value["Nom"]] = value["Bureau"]
-
-    dictionnaire.update(temp_dict)
-'''
 
 def load_csv(file):
     with open(file, newline="") as csvfile:

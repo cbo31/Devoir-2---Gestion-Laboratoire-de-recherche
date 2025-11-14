@@ -13,7 +13,8 @@ def gerer_arrivee(labo):
             bureau = input("Bureau ? ")
             enregistrer_arrivee(labo, nom, bureau)
             write_as_json(labo, "laboratoire.json")
-        except ValueError:
+            print(f"{nom} a bien été enregistré")
+        except PresentException:
             print("Impossible: déja là")
 
 
@@ -39,6 +40,7 @@ def gerer_bureau(labo):
         bureau = input("Bureau ? ")
         changer_bureau(labo, nom, bureau)
         write_as_json(labo, "laboratoire.json")
+        print(f"Le bureau de {nom} a bien été modifié")
     except AbsentException:
         print(f"{nom} n'existe pas")
     
@@ -49,6 +51,7 @@ def modification_nom(labo):
         nouveau_nom = input("Nouveau nom ? ")
         changer_nom(labo, nom, nouveau_nom)
         write_as_json(labo, "laboratoire.json")
+        print(f"{nom} a été modifié par {nouveau_nom}")
     except AbsentException:
         print(f"{nom} n'existe pas")
 
@@ -84,25 +87,23 @@ def import_json(labo):
 def import_from_csv(labo):
     file = input("Nom de fichier ? ") + ".csv"
     csv_dict = load_csv(file)
-    '''
-    try:
-        labo.update(csv_dict)
-    except RuntimeError:
-        
-        for csv_nom in csv_dict.keys():
-            if csv_nom in labo.keys():
-                print(f"{csv_nom} est déjà présent dans le laboratoire")
-        
-        print("test")
-    '''
 
-    for csv_nom in csv_dict.keys():
-        if csv_nom in labo.keys():
-            print(f"{csv_nom} est déjà présent dans le laboratoire")
-        else:
-            labo.update(csv_dict)
+    temp_dict = dict()
+    temp_list = list()
+    for csv_nom, csv_bureau in csv_dict.items():
+        if csv_nom not in labo:
+            temp_dict[csv_nom] = csv_bureau
+        else: 
+            temp_list.append(csv_nom)
+    
+    labo.update(temp_dict)
 
 
+    if temp_list == []:
+        pass
+    else:
+        print(f"{", ".join(temp_list)}, déjà présent dans le laboratoire")
+    
     write_as_json(labo, "laboratoire.json")
 
 
