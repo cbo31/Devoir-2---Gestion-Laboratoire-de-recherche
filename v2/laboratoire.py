@@ -110,8 +110,8 @@ def load_csv(dictionnaire, file):
 
 def load_csv(file):
     with open(file, newline="") as csvfile:
-        temp_dict = dict()
         reader = csv.DictReader(csvfile)
+        temp_dict = dict()
         for value in reader:
             temp_dict[value["Nom"]] = value["Bureau"]
         return temp_dict

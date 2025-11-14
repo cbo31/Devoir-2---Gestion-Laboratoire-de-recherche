@@ -83,12 +83,28 @@ def import_json(labo):
 
 def import_from_csv(labo):
     file = input("Nom de fichier ? ") + ".csv"
-    temp_dict = load_csv(file)
-    
-    if labo.keys() == temp_dict.keys():
-        print(f"{temp_dict.keys()} déjà présent")
-    else:
-        labo.update(temp_dict)
+    csv_dict = load_csv(file)
+    '''
+    try:
+        labo.update(csv_dict)
+    except RuntimeError:
+        
+        for csv_nom in csv_dict.keys():
+            if csv_nom in labo.keys():
+                print(f"{csv_nom} est déjà présent dans le laboratoire")
+        
+        print("test")
+    '''
+
+    for csv_nom in csv_dict.keys():
+        if csv_nom in labo.keys():
+            print(f"{csv_nom} est déjà présent dans le laboratoire")
+        else:
+            labo.update(csv_dict)
+
+
+    write_as_json(labo, "laboratoire.json")
+
 
 
 
@@ -96,14 +112,14 @@ def import_from_csv(labo):
 
 #Gerer option du menu
 def populate_menu(menu):
-    ajouter_options(menu, "Enregistrer une arrivée", gerer_arrivee)
-    ajouter_options(menu, "Présence d'une personne", presence)
-    ajouter_options(menu, "Enregistrer un départ", gerer_depart)
-    ajouter_options(menu, "Modifier le bureau d'une personne", gerer_bureau)
-    ajouter_options(menu, "Changer le nom d'une personne", modification_nom)
-    ajouter_options(menu, "Connaitre le bureau d'une personne", connaitre_bureau)
-    ajouter_options(menu, "Listing laboratoire", afficher_listing)
-    ajouter_options(menu, "Importer depuis un fichier csv", import_from_csv)
+    ajouter_options(menu, "Enregistrer une arrivée", gerer_arrivee, labo)
+    ajouter_options(menu, "Présence d'une personne", presence, labo)
+    ajouter_options(menu, "Enregistrer un départ", gerer_depart, labo)
+    ajouter_options(menu, "Modifier le bureau d'une personne", gerer_bureau, labo)
+    ajouter_options(menu, "Changer le nom d'une personne", modification_nom, labo)
+    ajouter_options(menu, "Connaitre le bureau d'une personne", connaitre_bureau, labo)
+    ajouter_options(menu, "Listing laboratoire", afficher_listing, labo)
+    ajouter_options(menu, "Importer depuis un fichier csv", import_from_csv, labo)
 
 
 if __name__ == "__main__":

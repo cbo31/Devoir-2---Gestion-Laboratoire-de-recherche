@@ -3,14 +3,14 @@ def Menu():
     return list()
 
 
-def ajouter_options(menu, name, fonction, *parameters):
-    menu.append( (name, fonction, parameters) )
+def ajouter_options(menu, name, fonction, labo, *parameters):
+    menu.append( (name, fonction, labo, parameters) )
 
 
 def traiter_choix(menu, choix):
     assert 0 <= choix <= len(menu)
     if choix != 0:
-        _, fonction, parameters = menu[choix -1]
+        _, fonction, labo, parameters = menu[choix -1]
         fonction(labo, *parameters)
 
 
@@ -27,7 +27,7 @@ def selection(menu):
 
 
 def afficher(menu):
-	for numero, (intitule, _, _) in enumerate(menu, 1):
+	for numero, (intitule, _, _, _) in enumerate(menu, 1):
 		print(f"{numero:2d}- {intitule}")
 	print(f"{0:2}- Quitter")
       
