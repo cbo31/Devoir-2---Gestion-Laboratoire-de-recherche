@@ -24,9 +24,6 @@ Evolution possible :
     }
 '''
 
-import pathlib
-
-
 # Les choix faits ici, ne devraient pas être utilisés à l'extérieur.
 
 class LaboException(Exception):

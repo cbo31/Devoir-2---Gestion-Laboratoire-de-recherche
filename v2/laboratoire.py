@@ -86,22 +86,19 @@ def ecrire_labo_html(labo):
 
 
 def write_as_json(dictionnaire, path):
-    #path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/laboratoire.json"
     with open(path, "w") as fp:
         json.dump(dictionnaire, fp, indent="")
 
 
 def load_json(dictionnaire, path):
-    #path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/laboratoire.json"
     with open(path, "r") as fp:
         temp_dict = json.load(fp)
+        dictionnaire.clear()
         dictionnaire.update(temp_dict)
 
 
-
-def modify_dict_csv(dictionnaire, file):
-    #path = "/Users/clement/Documents/Formation_DU_FullStack/devoirs/Python/Devoir2/devoir-2-gestion-laboratoire-de-recherche/v2/membres.csv"
-    #test = file
+'''
+def load_csv(dictionnaire, file):
     with open(file, newline="") as csvfile:
         temp_dict = dict()
         reader = csv.DictReader(csvfile)
@@ -109,3 +106,12 @@ def modify_dict_csv(dictionnaire, file):
             temp_dict[value["Nom"]] = value["Bureau"]
 
     dictionnaire.update(temp_dict)
+'''
+
+def load_csv(file):
+    with open(file, newline="") as csvfile:
+        temp_dict = dict()
+        reader = csv.DictReader(csvfile)
+        for value in reader:
+            temp_dict[value["Nom"]] = value["Bureau"]
+        return temp_dict

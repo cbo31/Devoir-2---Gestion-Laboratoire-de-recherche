@@ -3,6 +3,7 @@ Interface gestion du laboratoire
 '''
 
 from laboratoire import *
+from menus import*
 import os 
 
 #Fonctionne du gestionnaire de laboratoire
@@ -80,25 +81,20 @@ def import_json(labo):
         return labo 
 
 
-
-
 def import_from_csv(labo):
-    file = input("Nom de fichier ? ")
-    modify_dict_csv(labo, file)
+    file = input("Nom de fichier ? ") + ".csv"
+    temp_dict = load_csv(file)
+    
+    if labo.keys() == temp_dict.keys():
+        print(f"{temp_dict.keys()} déjà présent")
+    else:
+        labo.update(temp_dict)
 
 
 
 
 
-#Gestion du menu du gestionnaire de laboratoire 
-def Menu():
-    return list()
-
-
-def ajouter_options(menu, name, fonction, *parameters):
-    menu.append( (name, fonction, parameters) )
-
-
+#Gerer option du menu
 def populate_menu(menu):
     ajouter_options(menu, "Enregistrer une arrivée", gerer_arrivee)
     ajouter_options(menu, "Présence d'une personne", presence)
@@ -108,44 +104,6 @@ def populate_menu(menu):
     ajouter_options(menu, "Connaitre le bureau d'une personne", connaitre_bureau)
     ajouter_options(menu, "Listing laboratoire", afficher_listing)
     ajouter_options(menu, "Importer depuis un fichier csv", import_from_csv)
-
-
-def traiter_choix(menu, choix):
-    assert 0 <= choix <= len(menu)
-    if choix != 0:
-        _, fonction, parameters = menu[choix -1]
-        fonction(labo, *parameters)
-
-
-def selection(menu):
-	while True:
-            try:
-                numero = int(input("Votre choix ? "))   #Récupérer le choix de l'utilisateur 
-                if 0 <= numero <= len(menu):   #Le choix doit être compris entre 0 et la longueur du menu
-                    return numero
-                else: 
-                    print("Pas un numéro du menu")
-            except ValueError:
-                print("Incorrect...")
-
-
-def afficher(menu):
-	for numero, (intitule, _, _) in enumerate(menu, 1):
-		print(f"{numero:2d}- {intitule}")
-	print(f"{0:2}- Quitter")
-      
-
-def gerer(menu):
-    fini = False
-    while not fini:
-        afficher(menu)
-        choix = selection(menu)
-        print()
-        traiter_choix(menu, choix)
-        fini = choix == 0
-        print()
-    
-    print("Fermeture du gestionnaire de Laboratoire")
 
 
 if __name__ == "__main__":
